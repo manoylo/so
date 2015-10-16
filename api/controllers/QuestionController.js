@@ -22,7 +22,7 @@ module.exports = {
   view: function (req, res) {
     Question.findOne({
       id: req.params['questionId']
-    }).exec(function (err, question) {
+    }).populate('answers').exec(function (err, question) {
       if (err) {
         return res.serverError();
       }
