@@ -7,7 +7,7 @@
 
 module.exports = {
 
-  add: function(req, res) {
+  post: function(req, res) {
     var answer = {
       text: req.body['text'],
       question: req.body['questionId']

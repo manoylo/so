@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+
   index: function (req, res) {
     Question.find()
       .sort('createdAt DESC')
@@ -32,6 +33,30 @@ module.exports = {
       res.view({
         q: question
       });
+    });
+  },
+
+  post: function(req, res) {
+    var question = {
+      title: req.body['title'],
+      text: req.body['text']
+    };
+
+    var user = {
+      username: req.body['username']
+    };
+
+    User.findOrCreate(user, user).exec(function (err, user){
+      question['author'] = user['id'];
+
+      Question.create(question, function(err, createdQuestion) {
+        if(err) {
+          console.log(err);
+          //return res.serverError();
+        }
+        res.redirect('/questions/' + createdQuestion['id']);
+      });
+
     });
   }
 };
