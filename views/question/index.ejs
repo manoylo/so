@@ -1,0 +1,8 @@
+<h1>Latest questions</h1>
+<table class="table">
+  <% questions.forEach(function(q){ %>
+  <tr>
+    <td><a href="/questions/<%= q['id'] %>"><%= q['title'] %></a></td>
+  </tr>
+  <% }) %>
+</table>
