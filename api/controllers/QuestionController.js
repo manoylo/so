@@ -11,7 +11,7 @@ module.exports = {
       .sort('createdAt DESC')
       .exec(function (err, questions) {
         if (err) {
-          return res.send(500);
+          return res.serverError();
         }
         res.view({
           questions: questions
@@ -24,7 +24,7 @@ module.exports = {
       id: req.params['questionId']
     }).exec(function (err, question) {
       if (err) {
-        return res.send(500);
+        return res.serverError();
       }
       if(!question) {
         return res.notFound();

@@ -40,6 +40,11 @@ module.exports.routes = {
   '/questions/:questionId': {
     controller: 'QuestionController',
     action: 'view'
+  },
+
+  'POST /post-answer': {
+    controller: 'AnswerController',
+    action: 'add'
   }
 
   /***************************************************************************

@@ -15,6 +15,10 @@ module.exports = {
     text: {
       type: 'text',
       required: true
+    },
+    answers: {
+      collection: 'answer',
+      via: 'question'
     }
   }
 };
