@@ -1,8 +1,8 @@
 <div ng-controller="QuestionsController">
-<h1>Latest questions</h1>
+  <h1>Latest questions</h1>
   <table class="table">
     <tr ng-repeat="q in questions">
-      <td>{{q.title}}</td>
+      <td><a href="/questions/{{q.id}}">{{q.title}}</a></td>
     </tr>
   </table>
 </div>

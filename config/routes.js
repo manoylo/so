@@ -34,6 +34,10 @@ module.exports.routes = {
 
   '/': {
     view: 'questions'
+  },
+
+  'questions/:questionId': {
+    view: 'question'
   }
 
   /***************************************************************************

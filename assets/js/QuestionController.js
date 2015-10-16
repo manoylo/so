@@ -1,9 +1,9 @@
 var soApp = angular.module('soApp', []);
 
-soApp.controller('QuestionsController', ['$scope', '$http', function ($scope, $http) {
+soApp.controller('QuestionController', ['$scope', '$http', function ($scope, $http) {
   $http({
     method: 'GET',
-    url: '/question'
+    url: '/question' + req.params['questionId']
   }).then(function successCallback(response) {
     $scope.questions = response.data;
   });
