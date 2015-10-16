@@ -15,6 +15,10 @@ module.exports = {
     question: {
       model: 'question',
       required: true
+    },
+    author: {
+      model: 'user',
+      required: true
     }
   }
 };

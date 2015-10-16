@@ -8,7 +8,18 @@
 module.exports = {
 
   attributes: {
-
+    username: {
+      type: 'string',
+      required: true
+    },
+    answers: {
+      collection: 'answer',
+      via: 'author'
+    },
+    questions: {
+      collection: 'question',
+      via: 'author'
+    }
   }
 };
 

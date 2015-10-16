@@ -19,6 +19,10 @@ module.exports = {
     answers: {
       collection: 'answer',
       via: 'question'
+    },
+    author: {
+      model: 'user',
+      required: true
     }
   }
 };
