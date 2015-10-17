@@ -16,8 +16,19 @@ module.exports = {
           return res.serverError();
         }
 
+        if(_.contains(['answered', 'unanswered'], req.query['type'])) {
+          questions = _.filter(questions, function(q) {
+            if(req.query['type'] == 'answered') {
+              return q['answers'].length > 0;
+            } else {
+              return q['answers'].length == 0;
+            }
+          });
+        }
+
         res.view({
-          questions: questions
+          questions: questions,
+          type: req.query['type']
         });
 
       });
