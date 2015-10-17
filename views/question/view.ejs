@@ -1,29 +1,32 @@
 <div>
   <h1><%= q['title'] %></h1>
   <div><%= q['text'] %></div>
+  <p class="q-author">Author: <%= q['author']['username'] %></p>
 
-  <h3>Answers:</h3>
-  <table class="table">
+  <h3>Answers</h3>
+
+  <ul class="list-unstyled">
     <% q['answers'].forEach(function(a){ %>
-      <tr>
-        <td><%= a['text'] %></td>
-      </tr>
+    <li class="q-item">
+      <p><%= a['text'] %></p>
+      <p class="q-author">Author: <%= a['author']['username'] %></p>
+    </li>
     <% }) %>
-  </table>
+  </ul>
 
 </div>
-<hr/>
 
-<div>
+<div class="answer-form">
   <form action="/post-answer" method="post">
     <input type="hidden" name="questionId" value="<%= q['id'] %>"/>
-    <div class="form-group">
-      <textarea name="text" placeholder="Type your answer here..."></textarea>
+    <div class="form-group required">
+      <label for="text">Your answer</label>
+      <textarea class="form-control" id="text" name="text" placeholder="Type your answer here..." required></textarea>
     </div>
 
-    <div class="form-group">
+    <div class="form-group required">
       <label for="username">Your username</label>
-      <input id="username" name="username" value=""/>
+      <input class="form-control" id="username" name="username" value="" required/>
     </div>
 
     <button type="submit" class="btn btn-primary">Post your answer</button>

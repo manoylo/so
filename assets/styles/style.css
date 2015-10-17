@@ -18,4 +18,9 @@
 .q-author {
   font-size: 12px;
   text-align: right;
+  font-style: italic;
+}
+
+.answer-form {
+  margin-top: 30px;
 }

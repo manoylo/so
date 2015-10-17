@@ -16,9 +16,9 @@ module.exports = {
           return res.serverError();
         }
 
-        if(_.contains(['answered', 'unanswered'], req.query['type'])) {
-          questions = _.filter(questions, function(q) {
-            if(req.query['type'] == 'answered') {
+        if (_.contains(['answered', 'unanswered'], req.query['type'])) {
+          questions = _.filter(questions, function (q) {
+            if (req.query['type'] == 'answered') {
               return q['answers'].length > 0;
             } else {
               return q['answers'].length == 0;
@@ -37,15 +37,25 @@ module.exports = {
   view: function (req, res) {
     Question.findOne({
       id: req.params['questionId']
-    }).populate('answers').exec(function (err, question) {
+    }).populate('author').exec(function (err, question) {
       if (err) {
         return res.serverError();
       }
       if (!question) {
         return res.notFound();
       }
-      res.view({
-        q: question
+
+      Answer.find({
+        question: question['id']
+      }).sort('createdAt ASC').populate('author').exec(function (err, answers) {
+        if (err) {
+          return res.serverError();
+        }
+        question['answers'] = answers;
+
+        res.view({
+          q: question
+        });
       });
     });
   },
