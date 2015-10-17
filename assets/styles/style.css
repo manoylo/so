@@ -1,0 +1,21 @@
+.content {
+  padding: 0 20px;
+}
+
+.form-group.required label:after {
+  content:" *";
+  color:red;
+}
+
+.q-form {
+  margin-top: 30px;
+}
+
+.q-item {
+  border-bottom: 1px solid #dddddd;
+}
+
+.q-author {
+  font-size: 12px;
+  text-align: right;
+}

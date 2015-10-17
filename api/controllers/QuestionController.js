@@ -10,6 +10,7 @@ module.exports = {
   index: function (req, res) {
     Question.find()
       .sort('createdAt DESC')
+      .populateAll('author')
       .exec(function (err, questions) {
         if (err) {
           return res.serverError();
