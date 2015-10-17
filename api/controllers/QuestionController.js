@@ -10,14 +10,16 @@ module.exports = {
   index: function (req, res) {
     Question.find()
       .sort('createdAt DESC')
-      .populateAll('author')
+      .populateAll()
       .exec(function (err, questions) {
         if (err) {
           return res.serverError();
         }
+
         res.view({
           questions: questions
         });
+
       });
   },
 
@@ -28,7 +30,7 @@ module.exports = {
       if (err) {
         return res.serverError();
       }
-      if(!question) {
+      if (!question) {
         return res.notFound();
       }
       res.view({
@@ -37,7 +39,7 @@ module.exports = {
     });
   },
 
-  post: function(req, res) {
+  post: function (req, res) {
     var question = {
       title: req.body['title'],
       text: req.body['text']
@@ -47,11 +49,11 @@ module.exports = {
       username: req.body['username']
     };
 
-    User.findOrCreate(user, user).exec(function (err, user){
+    User.findOrCreate(user, user).exec(function (err, user) {
       question['author'] = user['id'];
 
-      Question.create(question, function(err, createdQuestion) {
-        if(err) {
+      Question.create(question, function (err, createdQuestion) {
+        if (err) {
           console.log(err);
           //return res.serverError();
         }
