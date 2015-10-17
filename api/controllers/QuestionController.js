@@ -38,9 +38,6 @@ module.exports = {
     Question.findOne({
       id: req.params['questionId']
     }).populate('author').exec(function (err, question) {
-      if (err) {
-        return res.serverError();
-      }
       if (!question) {
         return res.notFound();
       }
@@ -61,6 +58,14 @@ module.exports = {
   },
 
   post: function (req, res) {
+    // validation
+    var requiredFields = ['title', 'text', 'username'];
+    if(!_.every(requiredFields, function(field) {
+      return req.body[field];
+    })) {
+      return res.notFound();
+    }
+
     var question = {
       title: req.body['title'],
       text: req.body['text']
@@ -71,12 +76,14 @@ module.exports = {
     };
 
     User.findOrCreate(user, user).exec(function (err, user) {
+      if(!user || !user['id']) {
+        return res.serverError();
+      }
       question['author'] = user['id'];
 
       Question.create(question, function (err, createdQuestion) {
         if (err) {
-          console.log(err);
-          //return res.serverError();
+          return res.serverError();
         }
         res.redirect('/questions/' + createdQuestion['id']);
       });
