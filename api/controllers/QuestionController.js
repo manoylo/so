@@ -13,6 +13,7 @@ module.exports = {
       .populateAll()
       .exec(function (err, questions) {
         if (err) {
+          console.log(err);
           return res.serverError();
         }
 
@@ -38,6 +39,9 @@ module.exports = {
     Question.findOne({
       id: req.params['questionId']
     }).populate('author').exec(function (err, question) {
+      if (err) {
+        console.log(err);
+      }
       if (!question) {
         return res.notFound();
       }
@@ -46,6 +50,7 @@ module.exports = {
         question: question['id']
       }).sort('createdAt ASC').populate('author').exec(function (err, answers) {
         if (err) {
+          console.log(err);
           return res.serverError();
         }
         question['answers'] = answers;
@@ -60,9 +65,9 @@ module.exports = {
   post: function (req, res) {
     // validation
     var requiredFields = ['title', 'text', 'username'];
-    if(!_.every(requiredFields, function(field) {
-      return req.body[field];
-    })) {
+    if (!_.every(requiredFields, function (field) {
+        return req.body[field];
+      })) {
       return res.notFound();
     }
 
@@ -76,7 +81,7 @@ module.exports = {
     };
 
     User.findOrCreate(user, user).exec(function (err, user) {
-      if(!user || !user['id']) {
+      if (!user || !user['id']) {
         return res.serverError();
       }
       question['author'] = user['id'];
