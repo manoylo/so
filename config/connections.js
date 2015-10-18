@@ -88,16 +88,7 @@ module.exports.connections = {
     user: 'xfdausilimoubg',
     password: 'MPwrLwyuXmfJPTXTzKOkXjGHzp',
     database: 'd8a6vbg8logp54',
-    port: 5432
-  },
-
-  'db-core': {
-    adapter: 'sails-postgresql',
-    host: process.env.PG_HOSTNAME || 'ec2-54-204-15-48.compute-1.amazonaws.com',
-    user: process.env.PG_USER || 'xfdausilimoubg',
-    password: process.env.PG_PASSWORD || 'MPwrLwyuXmfJPTXTzKOkXjGHzp',
-    database: process.env.PG_DATABASE || 'd8a6vbg8logp54',
-    port: process.env.PG_PORT || 5432,
+    port: 5432,
     ssl: {
       rejectUnauthorized: false
     }
